@@ -4,8 +4,8 @@
   "description": "book catalog, based on Node.js, express and mongoDB",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js",
-    "devStart": "nodemon server.js"
+    "start": "nodemon server.js",
+    "start1": "nodemon server.js"
   },
   "repository": {
     "type": "git",
