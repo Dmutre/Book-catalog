@@ -14,7 +14,6 @@ router.get("/", async (req, res) => {
 router.get("/new", async (req, res) => {
   try {
     const authors = await Author.find();
-    console.log(authors);
     const book = new Book();
     res.render("books/new", {
       authors: authors,
