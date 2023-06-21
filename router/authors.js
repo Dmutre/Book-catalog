@@ -2,11 +2,23 @@
 
 const express = require("express");
 const router = express.Router();
-const Author = require("../models/authors");
+const Author = require("../models/authors.js");
 
 //All Authors Route
-router.get("/", (req, res) => {
-  res.render("authors/index");
+router.get("/", async (req, res) => {
+  let searchOptions = {};
+  if(req.query.name != null && req.query.name != "") {
+    searchOptions.name = new RegExp(req.query.name);
+  }
+  try {
+    const authors = await Author.find(searchOptions);
+    res.render("authors/index", {
+      authors: authors, 
+      searchOptions: req.query 
+    });
+  } catch {
+    res.redirect("/");
+  }
 });
 
 //New Author Route
@@ -15,11 +27,11 @@ router.get("/new", (req, res) => {
 });
 
 //Create Author Route
-router.post("/", (req, res) => {
+router.post("/", async (req, res) => {
   const author = new Author({
     name: req.body.name
   });
-  author.save().then(() => {
+  await author.save().then(() => {
     res.redirect("authors");
   }).catch((err) => {
       res.render("authors/new", {
@@ -27,7 +39,6 @@ router.post("/", (req, res) => {
         errorMessage: "Error creating Author",
       })
   });
-  //res.send(req.body.name);
 });
 
 module.exports = router;
