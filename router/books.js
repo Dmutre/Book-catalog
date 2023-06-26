@@ -26,7 +26,7 @@ router.get("/new", async (req, res) => {
 });
 
 //Create Book Route
-router.post("/", upload.single("cover"), async (req, res) => {
+router.post("/", upload.single("coverImageName"), async (req, res) => {
   const fileName = req.file != null ? req.file.filename : null;
   const book = new Book({
     title: req.body.title,
@@ -36,11 +36,13 @@ router.post("/", upload.single("cover"), async (req, res) => {
     coverImageName: fileName,
     description: req.body.description,
   });
+  console.log(req.body.publishDate);
 
   try {
     const newBook = await book.save();
     res.redirect("books");
-  } catch {
+  } catch(error) {
+    console.log(error);
     renderNewPage(res, book, true);
   };
 });
@@ -52,7 +54,9 @@ async function renderNewPage(res, book, hasError = false){
       authors: authors,
       book: book,
     }
-    if(hasError) params.errorMessage = "Error Creating Book";
+    if(hasError){
+      params.errorMessage = "Error Creating Book";
+    }
     res.render("books/new", params);
   } catch {
     res.redirect("/books");
