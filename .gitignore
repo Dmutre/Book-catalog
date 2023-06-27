@@ -1,6 +1,6 @@
 #Added
 .env
-public/uploads/bookCovers
+public/uploads/
 
 # Logs
 logs
