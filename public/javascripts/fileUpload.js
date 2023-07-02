@@ -1,7 +1,17 @@
-FilePond.reqisterPlugin(
-  FilePondPluginImagePreview,
-  FilePondPluginImageResize,
-  FilePondPluginFileEncode,
-)
+document.addEventListener('DOMContentLoaded', function() {
+  FilePond.registerPlugin(
+    FilePondPluginImagePreview,
+    FilePondPluginFileEncode,
+    FilePondPluginImageResize
+  );
 
-FilePond.parse(document.body)
+  const inputElement = document.querySelector('input[name="coverImageName"]');
+  const pond = FilePond.create(inputElement, {
+    allowImagePreview: true,
+    allowImageResize: true,
+    imageResizeTargetWidth: 300,
+    imageResizeTargetHeight: 400,
+    imageResizeMode: 'cover'
+    // Інші налаштування FilePond
+  });
+});
