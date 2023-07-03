@@ -74,17 +74,18 @@ router.put("/:id", async (req, res) => {
   }
 });
 
-router.delete("/:id", async (req, res) => {
-  let author;
+router.delete('/:id', async (req, res) => {
+  let author
   try {
-    author = await Author.findById(req.params.id);
-    await author.remove();
-    res.redirect(`/authors`);
+    author = await Author.findById(req.params.id)
+    await author.deleteOne()
+    res.redirect('/authors')
   } catch(err) {
-    if(author == null){
-      res.redirect("/");
+    if (author == null) {
+      res.redirect('/')
     } else {
-      res.render(`/authors/${author.id}`);
+      console.log(err);
+      res.redirect(`/authors/${author.id}`)
     }
   }
 });

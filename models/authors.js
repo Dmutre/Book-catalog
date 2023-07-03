@@ -10,16 +10,16 @@ const authorSchema = new mongoose.Schema({
   }
 });
 
-authorSchema.pre("remove", function(next) {
-  Book.find({ author: this.id }, (err, books => {
+authorSchema.pre('deleteOne', function(next) {
+  Book.find({ author: this.id }, (err, books) => {
     if (err) {
-      next(err);
-    } else if(Book.length > 0) {
-      next(new error("this author has book still"));
+      next(err)
+    } else if (books.length > 0) {
+      next(new Error('This author has books still'))
     } else {
-      next();
+      next()
     }
-  }))
-});
+  })
+})
 
 module.exports = mongoose.model("Author", authorSchema);
