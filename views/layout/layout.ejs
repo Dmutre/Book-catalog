@@ -14,10 +14,12 @@
   <title>Booktoria</title>
 </head>
 <body>
-  <br>
-  <%- include("../partials/header.ejs") %>
-  <%- include("../partials/errorMessage.ejs") %>
-  <%- body %>
-  <br>
+  <div class="container">
+    <%- include('../partials/header.ejs') %>
+    <div class="inner-container">
+      <%- include('../partials/errorMessage.ejs') %>
+      <%- body %>
+    </div>
+  </div>
 </body>
 </html>
