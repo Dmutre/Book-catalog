@@ -15,4 +15,4 @@ Also there is page that let you see list of authors, books and pages for adding.
 For books I made opportunity to add a lot of information, that would be saved in database. Also I used 
 filepond for nice window of put cover of the book.
 And also for search I made nice menu to chose date from or before book was published
-![Alt text](/Assets/image.png)
+![Alt text](/Assets/image4.png)
